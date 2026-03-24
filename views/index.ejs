@@ -1,0 +1,109 @@
+  <%- include('partials/header.ejs') %>
+
+ <!-- ===== HERO SECTION ===== -->
+
+<section class="hero">
+  <div class="hero-deco"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to InkWell</p>
+
+```
+<h1 class="hero-title">
+  Share your <em>ideas</em> with the world
+</h1>
+
+<p class="hero-sub">
+  A minimal blogging platform to write, read, and inspire.
+  Start your journey today.
+</p>
+
+<div class="hero-actions">
+  <% if (!user) { %>
+    <a href="/register" class="btn-primary">Get Started</a>
+    <a href="/login" class="btn-secondary">Login</a>
+  <% } else { %>
+    <a href="/blog/add" class="btn-primary">Write a Blog</a>
+    <a href="/blog" class="btn-secondary">Explore Blogs</a>
+  <% } %>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- ===== BLOG SECTION ===== -->
+
+<section class="section">
+  <div class="container">
+
+```
+<h2 class="section-title">Latest Stories</h2>
+
+<% if (blogs && blogs.length > 0) { %>
+  <div class="blog-grid">
+
+    <% blogs.forEach(blog => { %>
+      <div class="blog-card">
+
+        <!-- Image -->
+        <% if (blog.image) { %>
+          <div class="card-image" style="background-image: url('/uploads/<%= blog.image %>')"></div>
+        <% } else { %>
+          <div class="card-image card-image-placeholder"></div>
+        <% } %>
+
+        <!-- Content -->
+        <div class="card-body">
+
+          <!-- Tags -->
+          <div class="card-tags">
+            <% if (blog.tags) { %>
+              <% blog.tags.split(',').forEach(tag => { %>
+                <span class="tag"><%= tag.trim() %></span>
+              <% }) %>
+            <% } %>
+          </div>
+
+          <!-- Title -->
+          <h3 class="card-title">
+            <a href="/blog/<%= blog._id %>">
+              <%= blog.title %>
+            </a>
+          </h3>
+
+          <!-- Excerpt -->
+          <p class="card-excerpt">
+            <%= blog.excerpt || blog.content.substring(0, 100) + "..." %>
+          </p>
+
+          <!-- Meta -->
+          <div class="card-meta">
+            <span>📅 <%= new Date(blog.createdAt).toDateString() %></span>
+          </div>
+
+        </div>
+      </div>
+    <% }) %>
+
+  </div>
+<% } else { %>
+
+  <!-- Empty state -->
+  <div class="empty-state">
+    <p>No blogs yet 😢</p>
+
+    <% if (user) { %>
+      <a href="/blog/add" class="btn-primary">Write First Blog</a>
+    <% } %>
+  </div>
+
+<% } %>
+```
+
+  </div>
+</section>
+
+
+  <%- include('partials/footer.ejs') %>
+ 

@@ -1,0 +1,32 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <div class="col-md-8 mx-auto">
+
+    <h2 class="mb-4">Create Blog</h2>
+
+   <form action="/admin/add-blog" method="POST" enctype="multipart/form-data" class="card p-4 shadow-sm">
+
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea name="description" rows="5" class="form-control" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Image</label>
+        <input type="file" name="image" class="form-control">
+      </div>
+
+      <button class="btn btn-primary w-100">Publish</button>
+
+    </form>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

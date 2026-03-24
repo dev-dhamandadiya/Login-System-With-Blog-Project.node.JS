@@ -1,0 +1,33 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <div class="col-md-4 mx-auto">
+
+    <div class="card p-4 shadow-sm">
+
+      <h3 class="text-center mb-4">Login</h3>
+
+      <form action="/add-blog" method="POST">
+
+        <div class="mb-3">
+          <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+
+        <div class="mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+
+        <button class="btn btn-primary w-100">Login</button>
+
+      </form>
+
+      <p class="text-center mt-3">
+        Don’t have an account? <a href="/user/signup">Register</a>
+      </p>
+
+    </div>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
