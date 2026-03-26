@@ -54,8 +54,7 @@ project/
 ### 1️⃣ Clone Repository
 
 ```
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/dev-dhamandadiya/Login-System-With-Blog-Project.node.JS.git
 ```
 
 ---
@@ -102,13 +101,13 @@ http://localhost:8081
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-![Home](./screenshots/home.png)
+![Home](./screenshot/home.png)
 
 ### ➕ Add Blog
-![Add Blog](./screenshots/add-blog.png)
+![Add Blog](./screenshot/add-blog.png)
 
 ### 📚 All Blogs
-![All Blogs](./screenshots/all-blogs.png)
+![All Blogs](./screenshot/all-blogs.png)
 
 ## 🔒 Authentication Flow
 
