@@ -99,21 +99,16 @@ http://localhost:8081
 ```
 
 ---
-
 ## 📸 Screenshots
 
 ### 🏠 Home Page
-
-![Home]("./Screenshot 2026-03-26 233135.png")
+![Home](./screenshots/home.png)
 
 ### ➕ Add Blog
+![Add Blog](./screenshots/add-blog.png)
 
-![Add Blog]("./Screenshot 2026-03-26 233110.png")
 ### 📚 All Blogs
-
-![All Blogs]("./Screenshot 2026-03-26 230920.png")
-
----
+![All Blogs](./screenshots/all-blogs.png)
 
 ## 🔒 Authentication Flow
 
