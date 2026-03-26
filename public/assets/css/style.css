@@ -364,6 +364,36 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
   background: var(--white);
 }
 
+/* SINGLE BLOG PAGE */
+
+.single-blog {
+  max-width: 800px;
+  margin: auto;
+}
+
+.single-image img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.single-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.single-meta {
+  color: #777;
+  margin-bottom: 20px;
+}
+
+.single-content {
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+}
+
 /* File input */
 .file-input {
   padding: 0.6rem !important;
@@ -419,6 +449,35 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
 .auth-footer { text-align: center; font-size: 0.88rem; color: var(--muted); }
 .auth-footer a { color: var(--accent); font-weight: 500; }
 .auth-footer a:hover { text-decoration: underline; }
+
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn-edit {
+  padding: 6px 12px;
+  background: #ffc107;
+  color: black;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.btn-delete {
+  padding: 6px 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  opacity: 0.8;
+}
 
 /* ===== FOOTER ===== */
 .footer {

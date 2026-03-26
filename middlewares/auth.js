@@ -1,10 +1,11 @@
-// Check if user is authenticated
+// middleware/auth.js
+
 const auth = (req, res, next) => {
-  // Make user available in all views
+  // Make user available in all EJS views
   res.locals.user = req.user || null;
 
   if (!req.isAuthenticated()) {
-    return res.redirect('/login'); // update path to your login route
+    return res.redirect("/login");
   }
 
   next();

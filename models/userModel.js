@@ -28,17 +28,21 @@ const userSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // auto adds createdAt and updatedAt
+    timestamps: true,
   }
 );
 
-// Pre-save hook to hash password if needed
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+// ✅ FIXED (NO next, NO try-catch)
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) return;
+
   this.password = await bcrypt.hash(this.password, 10);
-  next();
+ 
 });
 
 const userModel = mongoose.model("User", userSchema);
-
 export default userModel;
+
+userSchema.methods.comparePassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};

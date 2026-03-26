@@ -99,6 +99,11 @@ bcrypt@^6.0.0:
     node-addon-api "^8.3.0"
     node-gyp-build "^4.8.4"
 
+bcryptjs@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.npmjs.org/bcryptjs/-/bcryptjs-3.0.3.tgz"
+  integrity sha512-GlF5wPWnSa/X5LKM1o0wz0suXIINz1iHRLvTS+sLyi7XPbe5ycmYI3DlZqVGZZtDgl4DmasFg7gOB3JYbphV5g==
+
 binary-extensions@^2.0.0, binary-extensions@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.3.0.tgz"
@@ -822,10 +827,10 @@ mongodb@^7.1.0, mongodb@~7.1:
     bson "^7.1.1"
     mongodb-connection-string-url "^7.0.0"
 
-mongoose@^9.3.1:
-  version "9.3.1"
-  resolved "https://registry.npmjs.org/mongoose/-/mongoose-9.3.1.tgz"
-  integrity sha512-58DuQti+LlRS74/UfWN4F3wZsC0Yr1dgTWZ2Wd3/TuSvm6rIdyAjDWbx2xGyuBooqJYdAWotVv4mQgVdivh+3Q==
+mongoose@^9.3.3:
+  version "9.3.3"
+  resolved "https://registry.npmjs.org/mongoose/-/mongoose-9.3.3.tgz"
+  integrity sha512-sfv5LOIPWeN5o/281kp4Rx9ZnuXb0g8CtvBTi7trYQs2PYYx8LWXegXxG3ar7VEns1o+d4h9LI/Dtc7dTTyYmA==
   dependencies:
     kareem "3.2.0"
     mongodb "~7.1"

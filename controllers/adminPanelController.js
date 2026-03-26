@@ -1,116 +1,99 @@
 import blogModel from "../models/blogModel.js";
-import fs from "fs";
 
 const adminPanelController = {
 
-    // Dashboard
-    adminDashboard(req, res) {
-        res.render("index", { user: req.user });
-    },
+  // Add Blog Page
+  addBlogPage(req, res) {
+    res.render("pages/addBlog");
+  },
 
-    // Show Add Blog Page
-    addBlogPage(req, res) {
-        res.render("./pages/add-blog");
-    },
-
-    // Add Blog
-  async addBlog(req, res) {
+  // Create Blog
+  async createBlog(req, res) {
     try {
-        console.log("USER:", req.user); // debug
+      const { title, content, excerpt, tags } = req.body;
 
-        const blog = await blogModel.create({
-            title: req.body.title,
-            description: req.body.description,
-            image: req.file ? req.file.path : null,
-            user: req.user._id   // 👈 IMPORTANT
-        });
+      await blogModel.create({
+        title,
+        content,
+        excerpt,
+        tags: tags ? tags.split(",") : [],
+        image: req.file ? req.file.filename : null,
+        user: req.user._id
+      });
 
-        console.log("BLOG SAVED:", blog);
-
-        res.redirect("/admin/my-blogs"); // 👈 show list after add
-
-    } catch (err) {
-        console.log(err);
-        res.send("Error adding blog");
+      res.redirect("/blog");
+    } catch (error) {
+      console.log(error);
     }
+  },
+
+  // Edit Page
+  async updateBlog(req, res) {
+  try {
+    const { id } = req.params;
+
+    let updateData = {
+      title: req.body.title,
+      content: req.body.content,
+      excerpt: req.body.excerpt,
+      tags: req.body.tags ? req.body.tags.split(",") : []
+    };
+
+    // 🔥 IMAGE UPDATE LOGIC
+    if (req.file) {
+      updateData.image = req.file.filename;
+    }
+
+    await blogModel.findByIdAndUpdate(id, updateData);
+
+    res.redirect("/admin/my-blogs");
+
+  } catch (error) {
+    console.log(error);
+  }
+},
+async editBlogPage(req, res) {
+  try {
+    const { id } = req.params;
+
+    const blog = await blogModel.findById(id);
+
+    res.render("pages/editBlog", { blog });
+
+  } catch (error) {
+    console.log(error);
+  }
 },
 
-    // My Blogs
-    async myBlogsPage(req, res) {
-        try {
-            const blogs = await blogModel
-                .find({ user: req.user._id })
-                .populate("user", "username");
+  // Update Blog
+  async updateBlog(req, res) {
+    try {
+      const { title, content, excerpt, tags } = req.body;
 
-            res.render("./pages/my-blogs", { blogs });
+      await blogModel.findByIdAndUpdate(req.params.id, {
+        title,
+        content,
+        excerpt,
+        tags: tags ? tags.split(",") : [],
+        updatedAt: Date.now()
+      });
 
-        } catch (err) {
-            console.log(err);
-            res.send("Error loading my blogs");
-        }
-    },
-
-    // All Blogs
-    async allBlogsPage(req, res) {
-        try {
-            const blogs = await blogModel
-                .find()
-                .populate("user", "username");
-
-            res.render("./pages/all-blogs", { blogs });
-
-        } catch (err) {
-            console.log(err);
-            res.send("Error loading blogs");
-        }
-    },
-
-    // Edit Page
-    async editBlogPage(req, res) {
-        const blog = await blogModel.findById(req.params.id);
-        res.render("./pages/edit-blog", { blog });
-    },
-
-    // Update Blog
-    async editBlog(req, res) {
-        try {
-            let blog = await blogModel.findById(req.params.id);
-
-            if (req.file) {
-                if (blog.image) {
-                    fs.unlinkSync(blog.image);
-                }
-                req.body.image = req.file.path;
-            }
-
-            await blogModel.findByIdAndUpdate(req.params.id, req.body);
-
-            res.redirect("/admin/my-blogs");
-
-        } catch (err) {
-            console.log(err);
-            res.send("Error updating blog");
-        }
-    },
-
-    // Delete Blog
-    async deleteBlog(req, res) {
-        try {
-            const blog = await blogModel.findById(req.params.id);
-
-            if (blog.image) {
-                fs.unlinkSync(blog.image);
-            }
-
-            await blogModel.findByIdAndDelete(req.params.id);
-
-            res.redirect("/admin/my-blogs");
-
-        } catch (err) {
-            console.log(err);
-            res.send("Error deleting blog");
-        }
+      res.redirect("/blog");
+    } catch (error) {
+      console.log(error);
     }
+  },
+
+  // Delete Blog
+  async deleteBlog(req, res) {
+    try {
+      await blogModel.findByIdAndDelete(req.params.id);
+      
+      res.redirect("/blog");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
 };
 

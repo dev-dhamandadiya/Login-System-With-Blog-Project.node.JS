@@ -1,0 +1,47 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">All Blogs</h2>
+
+  <div class="row">
+
+    <% blogs.forEach(blog => { %>
+
+      <div class="col-md-4 mb-4">
+
+        <div class="card shadow-sm">
+
+          <% if (blog.image) { %>
+            <img src="/uploads/<%= blog.image %>" class="card-img-top">
+          <% } %>
+
+          <div class="card-body">
+
+            <h5><%= blog.title %></h5>
+
+            <p><%= blog.excerpt || blog.content.substring(0,100) %></p>
+
+            <a href="/blog/<%= blog._id %>" class="btn btn-sm btn-primary">Read</a>
+
+            <% if (user && blog.user && blog.user._id.toString() === user._id.toString()) { %>
+
+              <a href="/admin/edit-blog/<%= blog._id %>" class="btn btn-sm btn-warning">Edit</a>
+
+              <form action="/admin/delete-blog/<%= blog._id %>" method="POST" style="display:inline;">
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </form>
+
+            <% } %>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -3,36 +3,47 @@ import LocalStrategy from "passport-local";
 import userModel from "../models/userModel.js";
 import bcrypt from "bcrypt";
 
-// Configure local strategy
 passport.use(
-  "local",
-  new LocalStrategy(async (username, password, done) => {
-    try {
-      const user = await userModel.findOne({ username });
-      if (!user) return done(null, false);
+  new LocalStrategy(
+    { usernameField: "email" },
+    async (email, password, done) => {
+      console.log("LOGIN EMAIL:", email);
+
+      const user = await userModel.findOne({ email });
+
+      console.log("DB USER:", user);
+
+      if (!user) {
+        console.log("❌ User not found");
+        return done(null, false);
+      }
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return done(null, false);
+
+      console.log("PASSWORD MATCH:", isMatch);
+
+      if (!isMatch) {
+        console.log("❌ Wrong password");
+        return done(null, false);
+      }
+
+      console.log("✅ LOGIN SUCCESS");
 
       return done(null, user);
-    } catch (error) {
-      return done(error, false);
     }
-  })
+  )
 );
 
-// Serialize user id to session
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-// Deserialize user from session
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await userModel.findById(id);
     done(null, user);
   } catch (error) {
-    done(error, false);
+    done(error);
   }
 });
 

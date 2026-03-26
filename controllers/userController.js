@@ -1,41 +1,73 @@
-import UserModel from "../models/userModel.js";
-import bcrypt from "bcrypt";
+import userModel from "../models/userModel.js";
+import passport from "passport";
 
 const userController = {
 
-  // login page
-  loginPage(req, res) {
-    res.render("pages/login");
-  },
-
-  // register page
+  // ================= REGISTER PAGE =================
   registerPage(req, res) {
     res.render("pages/register");
   },
 
-  // register user
-  async registerUser(req, res) {
+  // ================= LOGIN PAGE =================
+  loginPage(req, res) {
+    res.render("pages/login");
+  },
+
+  // ================= CREATE USER =================
+  async createUser(req, res) {
     try {
-      const { username, email, password } = req.body;
+      const { username, email, password, confirmpassword } = req.body;
 
-      const hash = await bcrypt.hash(password, 10);
+      // Password match check
+      if (password !== confirmpassword) {
+        return res.redirect("/register");
+      }
 
-      await UserModel.create({
-        username,
-        email,
-        password: hash
-      });
+      // Check existing user
+      const existingUser = await userModel.findOne({ email });
+      if (existingUser) {
+        return res.redirect("/register");
+      }
 
+      // Create user (password hashed automatically)
+      await userModel.create({ username, email, password });
+
+      // Redirect to login
       res.redirect("/login");
-    } catch (err) {
-      console.log(err);
+
+    } catch (error) {
+      console.log(error);
     }
   },
 
-  // logout
-  logoutUser(req, res) {
+  // ================= LOGIN USER (PASSPORT) =================
+  loginUser(req, res, next) {
+  console.log("BODY:", req.body);
+
+  passport.authenticate("local", (err, user) => {
+    console.log("USER:", user); // 👈 add this
+
+    if (err) return next(err);
+
+    if (!user) {
+      console.log("LOGIN FAILED");
+      return res.redirect("/login");
+    }
+
+    req.logIn(user, (err) => {
+      if (err) return next(err);
+
+      console.log("LOGIN SUCCESS"); // 👈 add this
+
+      return res.redirect("/blog");
+    });
+  })(req, res, next);
+},
+
+  // ================= LOGOUT =================
+  logout(req, res) {
     req.logout(() => {
-      res.redirect("/login");
+      res.redirect("/");
     });
   }
 

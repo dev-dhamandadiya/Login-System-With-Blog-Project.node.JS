@@ -54,35 +54,56 @@
         <% } %>
 
         <!-- Content -->
-        <div class="card-body">
+       <div class="card-body">
 
-          <!-- Tags -->
-          <div class="card-tags">
-            <% if (blog.tags) { %>
-              <% blog.tags.split(',').forEach(tag => { %>
-                <span class="tag"><%= tag.trim() %></span>
-              <% }) %>
-            <% } %>
-          </div>
+  <!-- Tags -->
+  <div class="card-tags">
+    <% if (blog.tags) { %>
+      <% blog.tags.forEach(tag => { %>
+        <span class="tag"><%= tag.trim() %></span>
+      <% }) %>
+    <% } %>
+  </div>
 
-          <!-- Title -->
-          <h3 class="card-title">
-            <a href="/blog/<%= blog._id %>">
-              <%= blog.title %>
-            </a>
-          </h3>
+  <!-- Title -->
+  <h3 class="card-title">
+    <a href="/blog/<%= blog._id %>">
+      <%= blog.title %>
+    </a>
+  </h3>
 
-          <!-- Excerpt -->
-          <p class="card-excerpt">
-            <%= blog.excerpt || blog.content.substring(0, 100) + "..." %>
-          </p>
+  <!-- Excerpt -->
+  <p class="card-excerpt">
+    <%= blog.excerpt || blog.content.substring(0, 100) + "..." %>
+  </p>
 
-          <!-- Meta -->
-          <div class="card-meta">
-            <span>📅 <%= new Date(blog.createdAt).toDateString() %></span>
-          </div>
+  <!-- Meta -->
+  <div class="card-meta">
+    <span>📅 <%= new Date(blog.createdAt).toDateString() %></span>
+  </div>
 
-        </div>
+  <!-- 🔥 ACTION BUTTONS -->
+  <% if (user && blog.user && blog.user.toString() === user._id.toString()) { %>
+
+    <div class="card-actions">
+
+      <!-- Edit -->
+      <a href="/admin/edit-blog/<%= blog._id %>" class="btn-edit">
+        ✏️ Edit
+      </a>
+
+      <!-- Delete -->
+      <form action="/admin/delete-blog/<%= blog._id %>" method="POST" style="display:inline;">
+        <button type="submit" class="btn-delete" onclick="return confirm('Delete this blog?')">
+          🗑️ Delete
+        </button>
+      </form>
+
+    </div>
+
+  <% } %>
+
+</div>
       </div>
     <% }) %>
 

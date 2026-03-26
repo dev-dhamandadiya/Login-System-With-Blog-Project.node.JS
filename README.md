@@ -1,140 +1,170 @@
-📘 Blog Management System (Node.js + Express + MongoDB)
+# 📝 InkWell - Blog Management System
 
-A full-stack Blog Application built using Node.js, Express, MongoDB, EJS, and Passport.js.
-Users can register, login, and manage their own blog posts with image upload support.
+A full-stack **Blog Management Web Application** built using **Node.js, Express, MongoDB, EJS, and Passport.js Authentication**.
 
-🚀 Features
-🔐 User Authentication (Login / Register)
-✍️ Create Blog Posts
-🖼️ Image Upload (Multer)
-📋 View My Blogs
-🌍 View All Blogs
-✏️ Edit Blog
-🗑️ Delete Blog
-👤 Session-based Authentication (Passport.js)
-🛠️ Tech Stack
-Backend: Node.js, Express.js
-Frontend: EJS, Bootstrap 5
-Database: MongoDB (Mongoose)
-Authentication: Passport.js
-File Upload: Multer
+This project allows users to register, login, create blogs, upload images, edit, and delete their own blogs.
+
+---
+
+## 🚀 Features
+
+* 🔐 User Authentication (Register / Login / Logout)
+* 🔑 Secure Password Hashing (bcrypt)
+* 📝 Create Blog with Image Upload
+* 📄 View All Blogs
+* 👤 User-specific Blog Management (My Blogs)
+* ✏️ Edit Blog
+* ❌ Delete Blog
+* 📷 Image Upload using Multer
+* 🎨 Responsive UI with EJS Templates
+
+---
+
+## 🛠️ Tech Stack
+
+* Backend: Node.js, Express.js
+* Database: MongoDB Atlas + Mongoose
+* Frontend: EJS, Bootstrap
+* Authentication: Passport.js (Local Strategy)
+* File Upload: Multer
+
+---
+
+## 📂 Project Structure
+
+```
+project/
+│── controllers/
+│── models/
+│── routes/
+│── middlewares/
+│── public/
+│── views/
+│    ├── pages/
+│    └── partials/
+│── config/
+│── .env
+│── index.js
+```
+
+---
+
+## ⚙️ Installation & Setup
+
+### 1️⃣ Clone Repository
+
+```
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+---
+
+### 2️⃣ Install Dependencies
+
+```
+npm install
+```
+
+---
+
+### 3️⃣ Setup Environment Variables (.env)
+
+```
+PORT=8081
+MONGO_URI=your_mongodb_connection_string
+SESSION_SECRET=superSecret123
+```
+
+---
+
+### 4️⃣ Run Project
+
+```
+npm run dev
+```
+
+or
+
+```
+node index.js
+```
+
+---
+
+## 🌐 Application URL
+
+```
+http://localhost:8081
+```
+
+---
 
 ## 📸 Screenshots
 
-| Page | Preview |
-![alt text](<Screenshot 2026-03-25 000108-1.png>) 
-![alt text](<Screenshot 2026-03-25 000216-1.png>) !
-[alt text](<Screenshot 2026-03-25 000347-1.png>)
+### 🏠 Home Page
 
+![Home]("./Screenshot 2026-03-26 233135.png")
 
-📁 Project Structure
-project-root/
-│
-├── controllers/
-│   ├── adminPanelController.js
-│   ├── userController.js
-│   └── blogController.js
-│
-├── models/
-│   ├── userModel.js
-│   └── blogModel.js
-│
-├── routes/
-│   ├── index.js
-│   ├── authRouter.js
-│   └── adminPanelRouter.js
-│
-├── middleware/
-│   ├── auth.js
-│   └── imageUpload.js
-│
-├── views/
-│   ├── pages/
-│   ├── partials/
-│   └── index.ejs
-│
-├── public/
-│   └── assets/
-│
-├── uploads/
-│
-├── index.js
-└── .env
+### ➕ Add Blog
 
+![Add Blog]("./Screenshot 2026-03-26 233110.png")
+### 📚 All Blogs
 
-⚙️ Installation
-1. Clone Repository
-git clone https://github.com/dev-dhamandadiya/blogDB
-cd your-repo-name
-2. Install Dependencies
-npm install
-3. Setup Environment Variables
+![All Blogs]("./Screenshot 2026-03-26 230920.png")
 
-Create a .env file:
+---
 
-PORT=8081
-MONGODB_URL=your_mongodb_connection_string
-SESSION_SECRET=your_secret_key
-4. Run the Server
-npm start
+## 🔒 Authentication Flow
 
-OR
+* User registers → account created
+* User logs in → session created
+* Access protected routes
+* Logout destroys session
 
-node index.js
-5. Open in Browser
-http://localhost:8081
-🔑 Routes Overview
-Auth Routes
-Method	Route	Description
-GET	/login	Login Page
-POST	/login	Login User
-GET	/register	Register Page
-POST	/register	Register User
-GET	/logout	Logout User
-Blog Routes
-Method	Route	Description
-GET	/admin/add-blog	Add Blog Page
-POST	/admin/add-blog	Create Blog
-GET	/admin/my-blogs	User Blogs
-GET	/admin/all-blogs	All Blogs
-GET	/admin/edit-blog/:id	Edit Blog Page
-POST	/admin/edit-blog/:id	Update Blog
-GET	/admin/delete-blog/:id	Delete Blog
-📸 Image Upload
-Images are stored in /uploads folder
-Static serving enabled:
-app.use('/uploads', express.static('uploads'));
-🧠 Important Notes
-Make sure MongoDB is connected properly
-Ensure uploads folder exists
-User must be logged in to create blogs
-Use correct route paths (e.g., /admin/add-blog)
-🐞 Common Errors
-❌ Cannot POST /login
+---
 
-➡️ Check form action matches route
+## 📌 Important Routes
 
-❌ blogs is not defined
+| Route                  | Method | Description   |
+| ---------------------- | ------ | ------------- |
+| /register              | GET    | Register Page |
+| /login                 | GET    | Login Page    |
+| /blog                  | GET    | All Blogs     |
+| /my-blogs              | GET    | User Blogs    |
+| /admin/add-blog        | GET    | Add Blog Page |
+| /admin/edit-blog/:id   | GET    | Edit Blog     |
+| /admin/delete-blog/:id | POST   | Delete Blog   |
 
-➡️ Pass blogs from controller:
+---
 
-res.render("index", { blogs });
-❌ Image not showing
+## 🧠 Learnings
 
-➡️ Add static middleware:
+* Authentication using Passport.js
+* File uploads with Multer
+* MVC Architecture in Node.js
+* MongoDB Atlas integration
+* Session management
 
-app.use('/uploads', express.static('uploads'));
-🌟 Future Improvements
-🔍 Search & Filter Blogs
-💬 Comments System
-❤️ Like Feature
-📱 Mobile Responsive UI
-🌐 Public Blog Page (/blog/:id)
-👨‍💻 Author
+---
 
-Your Name
-GitHub: https://github.com/your-dev-dhamandadiya
+## 💡 Future Improvements
 
-📜 License
+* ❤️ Like / Comment System
+* 🔍 Search & Filter Blogs
+* 📱 Mobile Optimization
+* 🌐 Deployment (Render / Vercel)
 
-This project is open-source and free to use.
+---
+
+## 👨‍💻 Author
+
+**Diya Hoshiyarsingh Dhamanda
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
+
+---

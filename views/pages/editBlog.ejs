@@ -1,0 +1,41 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <div class="col-md-6 mx-auto">
+
+    <div class="card p-4 shadow-sm">
+
+      <h3 class="text-center mb-4">Edit Blog</h3>
+
+      <!-- 🔥 enctype IMPORTANT -->
+      <form action="/admin/edit-blog/<%= blog._id %>" method="POST" enctype="multipart/form-data">
+
+        <!-- ✅ SHOW CURRENT IMAGE -->
+        <% if (blog.image) { %>
+          <div class="mb-3 text-center">
+            <p>Current Image:</p>
+            <img src="/uploads/<%= blog.image %>" width="150" class="mb-2" />
+          </div>
+        <% } %>
+
+        <!-- ✅ UPLOAD NEW IMAGE -->
+        <input type="file" name="image" class="form-control mb-3">
+
+        <input type="text" name="title" value="<%= blog.title %>" class="form-control mb-3" required>
+
+        <textarea name="content" class="form-control mb-3" rows="5"><%= blog.content %></textarea>
+
+        <input type="text" name="excerpt" value="<%= blog.excerpt %>" class="form-control mb-3">
+
+        <input type="text" name="tags" value="<%= blog.tags.join(',') %>" class="form-control mb-3">
+
+        <button class="btn btn-warning w-100">Update Blog</button>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

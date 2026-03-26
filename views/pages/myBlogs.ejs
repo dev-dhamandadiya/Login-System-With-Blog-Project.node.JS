@@ -1,0 +1,36 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <h2 class="text-center mb-4">My Blogs</h2>
+
+  <div class="row">
+
+    <% blogs.forEach(blog => { %>
+
+      <div class="col-md-4 mb-4">
+
+        <div class="card p-3 shadow-sm">
+
+          <h5><%= blog.title %></h5>
+           <% if (blog.image) { %>
+          <div class="mb-3 text-center">
+            <p>Current Image:</p>
+            <img src="/uploads/<%= blog.image %>" width="200" class="mb-2" />
+          </div>
+        <% } %>
+          <a href="/admin/edit-blog/<%= blog._id %>" class="btn btn-warning btn-sm">Edit</a>
+
+          <form action="/admin/delete-blog/<%= blog._id %>" method="POST" style="display:inline;">
+            <button class="btn btn-danger btn-sm">Delete</button>
+          </form>
+
+        </div>
+
+      </div>
+
+    <% }) %>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>

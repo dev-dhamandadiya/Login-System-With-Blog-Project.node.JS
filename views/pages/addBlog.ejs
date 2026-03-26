@@ -1,0 +1,31 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="container py-5">
+  <div class="col-md-6 mx-auto">
+
+    <div class="card p-4 shadow-sm">
+
+      <h3 class="text-center mb-4">Add Blog</h3>
+
+      <form action="/admin/add-blog" method="POST" enctype="multipart/form-data">
+
+        <input type="text" name="title" class="form-control mb-3" placeholder="Title" required>
+
+        <textarea name="content" class="form-control mb-3" rows="5" placeholder="Content" required></textarea>
+
+        <input type="text" name="excerpt" class="form-control mb-3" placeholder="Excerpt">
+
+        <input type="text" name="tags" class="form-control mb-3" placeholder="Tags (comma separated)">
+
+        <input type="file" name="image" class="form-control mb-3">
+
+        <button class="btn btn-success w-100">Publish Blog</button>
+
+      </form>
+
+    </div>
+
+  </div>
+</div>
+
+<%- include('../partials/footer.ejs') %>
