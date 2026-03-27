@@ -104,10 +104,14 @@ http://localhost:8081
 ![Home](./screenshot/home.png)
 
 ### ➕ Add Blog
-![Add Blog](./screenshot/add-blog.png)
+![Add Blog](./screenshot/add-blogs.png)
 
 ### 📚 All Blogs
 ![All Blogs](./screenshot/all-blogs.png)
+
+
+### 📚 Single Blogs Details
+![All Blogs](./screenshot/details.png)
 
 ## 🔒 Authentication Flow
 
